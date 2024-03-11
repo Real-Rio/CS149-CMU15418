@@ -107,8 +107,6 @@ public:
             TaskID task_id;
             bool runtask = false;
 
-            // TODO:如何增加并行性，使得有线程从 waiting_tasks_ 中取出 task 放入 ready_tasks_ 的过程中，其他线程可以从 ready_tasks_ 中取出 task 执行
-            // 改成生产者消费者模型
             ready_mutex_.lock();
             if (ready_tasks_.empty())
             {
@@ -244,11 +242,9 @@ public:
         }
 
         {
-            // std::unique_lock<std::mutex> lock(waiting_mutex_);
             waiting_tasks_.emplace_back(taskID, [func]
                                         { func(); });
         }
-        // condition.notify_one();
         return;
     }
 
@@ -256,8 +252,7 @@ public:
     {
         if (deps.empty())
             return;
-        // std::unique_lock<std::mutex> lock(waiting_mutex_);
-        std::unique_lock<std::mutex> lock(mutex);
+        std::unique_lock<std::mutex> lock(waiting_mutex_);
 
         deps_[id] = std::move(deps);
     }
@@ -269,7 +264,6 @@ public:
             stop = true;
         }
         ConWaitReady_.notify_all();
-        // condition.notify_all();
         for (std::thread &thread : threads)
             thread.join();
     }
@@ -281,7 +275,6 @@ private:
     std::condition_variable ConAllDone_;
     std::condition_variable ConWaitReady_;
     bool stop;
-    // bool allWorkDone;
 
     // ready sector
     std::mutex ready_mutex_;
@@ -293,7 +286,6 @@ private:
     std::vector<std::pair<TaskID, std::function<void()>>> waiting_tasks_;
     std::unordered_map<TaskID, std::vector<TaskID>> deps_;
     bool hasWorker; // 是否有线程在检查waiting_tasks_
-
 };
 
 #endif
