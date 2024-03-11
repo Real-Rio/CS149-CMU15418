@@ -8,8 +8,10 @@
             "name": "(lldb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}/myexp",
-            "args": [],
+            "program": "${fileDirname}/runtasks",
+            "args": [
+                "strict_diamond_deps_async"
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],
