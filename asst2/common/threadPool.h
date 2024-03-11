@@ -108,45 +108,82 @@ public:
             bool runtask = false;
 
             // TODO:如何增加并行性，使得有线程从 waiting_tasks_ 中取出 task 放入 ready_tasks_ 的过程中，其他线程可以从 ready_tasks_ 中取出 task 执行
-            mutex.lock();
+            // 改成生产者消费者模型
+            ready_mutex_.lock();
             if (ready_tasks_.empty())
             {
+                ready_mutex_.unlock();
+                mutex.lock();
                 // check waiting_tasks_
-                for (auto it = waiting_tasks_.begin(); it != waiting_tasks_.end();) 
+                if (!hasWorker)
                 {
-                    task_id = it->first;
-                    if (checkDeps(task_id))
+                    hasWorker = true;
+                    mutex.unlock();
+
+                    waiting_mutex_.lock();
+                    for (auto it = waiting_tasks_.begin(); it != waiting_tasks_.end();)
                     {
-                        ready_tasks_.emplace(*it);
-                        id2readyTaskNum[task_id] += 1;
-                        deps_.erase(task_id);
-                        it = waiting_tasks_.erase(it);
-                        runtask = true;
-                        // break;
+                        task_id = it->first;
+                        ready_mutex_.lock();
+                        if (checkDeps(task_id))
+                        {
+                            ready_tasks_.emplace(*it);
+                            id2readyTaskNum[task_id] += 1;
+
+                            deps_.erase(task_id);
+                            it = waiting_tasks_.erase(it);
+                            runtask = true;
+                            ConWaitReady_.notify_one();
+                        }
+                        else
+                        {
+                            ++it;
+                        }
+                        ready_mutex_.unlock();
                     }
-                    else
-                    {
-                        ++it;
-                    }
+                    waiting_mutex_.unlock();
+
+                    mutex.lock();
+                    hasWorker = false;
+                    mutex.unlock();
                 }
-                if (!runtask)
+                else
                 {
                     mutex.unlock();
-                    continue;
+
+                    std::unique_lock<std::mutex> lock(ready_mutex_);
+                    ConWaitReady_.wait(lock, [this]
+                                       { return !ready_tasks_.empty() || stop; });
+                    if (stop)
+                        return;
+
+                    runtask = true;
                 }
-                // waiting_mutex_.unlock();
+            }
+            else
+            {
+                runtask = true;
+                ready_mutex_.unlock();
             }
 
+            if (!runtask)
+                continue;
+
+            ready_mutex_.lock();
+            if (ready_tasks_.empty())
+            {
+                ready_mutex_.unlock();
+                continue;
+            }
             // 从 ready_tasks_ 中取出 task
             task_id = ready_tasks_.front().first;
             task = std::move(ready_tasks_.front().second);
             ready_tasks_.pop();
-
-            mutex.unlock();
+            ready_mutex_.unlock();
 
             task();
 
-            std::lock_guard<std::mutex> lock(mutex);
+            std::lock_guard<std::mutex> lock(ready_mutex_);
             id2readyTaskNum[task_id] -= 1;
             if (id2readyTaskNum[task_id] == 0)
             {
@@ -177,14 +214,23 @@ public:
         // 所有 task 完成后才返回
         std::unique_lock<std::mutex> lock(mutex);
         ConAllDone_.wait(lock, [this]
-                         { return waiting_tasks_.empty() && id2readyTaskNum.empty(); });
+                         { return checkAllDone(); });
+    }
+
+    bool checkAllDone()
+    {
+        // std::lock_guard<std::mutex> lock(waiting_mutex_);
+        // std::lock_guard<std::mutex> lock2(ready_mutex_);
+
+        return waiting_tasks_.empty() && id2readyTaskNum.empty();
     }
 
     template <typename Func>
     void enqueue(Func &&func, int taskID)
     {
-        // printf("enqueue taskID: %d\n", taskID);
-        std::lock_guard<std::mutex> lock(mutex);
+        std::lock_guard<std::mutex> lock(waiting_mutex_);
+        std::lock_guard<std::mutex> lock2(ready_mutex_);
+
         // 无依赖直接放入 ready 队列
         if (deps_.find(taskID) == deps_.end())
         {
@@ -192,6 +238,7 @@ public:
             ready_tasks_.emplace(taskID, [func]
                                  { func(); });
             id2readyTaskNum[taskID] += 1;
+            ConWaitReady_.notify_one();
             // condition.notify_one();
             return;
         }
@@ -221,6 +268,7 @@ public:
             std::unique_lock<std::mutex> lock(mutex);
             stop = true;
         }
+        ConWaitReady_.notify_all();
         // condition.notify_all();
         for (std::thread &thread : threads)
             thread.join();
@@ -231,17 +279,21 @@ private:
 
     std::mutex mutex;
     std::condition_variable ConAllDone_;
+    std::condition_variable ConWaitReady_;
     bool stop;
+    // bool allWorkDone;
 
     // ready sector
-    // std::mutex ready_mutex_;
+    std::mutex ready_mutex_;
     std::queue<std::pair<TaskID, std::function<void()>>> ready_tasks_;
     std::unordered_map<TaskID, int> id2readyTaskNum;
 
     // waiting sector
-    // std::mutex waiting_mutex_;
+    std::mutex waiting_mutex_;
     std::vector<std::pair<TaskID, std::function<void()>>> waiting_tasks_;
-    std::unordered_map<TaskID, std::vector<TaskID>> deps_; // 记录依赖中最大的 taskID
+    std::unordered_map<TaskID, std::vector<TaskID>> deps_;
+    bool hasWorker; // 是否有线程在检查waiting_tasks_
+
 };
 
 #endif

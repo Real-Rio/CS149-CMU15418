@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${fileDirname}/runtasks",
             "args": [
-                "strict_diamond_deps_async"
+                "super_super_light"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
