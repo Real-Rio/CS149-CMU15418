@@ -1,0 +1,163 @@
+{
+    find_program = {
+        git = "/usr/bin/git",
+        ping = "/usr/bin/ping",
+        gcc = "/usr/bin/gcc",
+        ["/usr/local/cuda/bin/nvcc"] = "/usr/local/cuda/bin/nvcc"
+    },
+    ["detect.sdks.find_cuda"] = {
+        cuda = {
+            bindir = "/usr/local/cuda/bin",
+            includedirs = {
+                "/usr/local/cuda/include"
+            },
+            linkdirs = {
+                "/usr/local/cuda/lib64"
+            },
+            sdkdir = "/usr/local/cuda",
+            version = "12.4"
+        }
+    },
+    find_programver = {
+        ["/usr/local/cuda/bin/nvcc"] = "12.4"
+    },
+    find_cudadevices = {
+        data = {
+            {
+                pageableMemoryAccess = false,
+                canUseHostPointerForRegisteredMem = false,
+                maxTexture2DLinear = {
+                    131072,
+                    65000,
+                    2097120
+                },
+                multiProcessorCount = 5,
+                concurrentManagedAccess = false,
+                maxSurface1D = 32768,
+                regsPerMultiprocessor = 65536,
+                sharedMemPerBlock = 49152,
+                major = 6,
+                sharedMemPerBlockOptin = 49152,
+                memoryClockRate = 3504000,
+                streamPrioritiesSupported = true,
+                localL1CacheSupported = true,
+                singleToDoublePrecisionPerfRatio = 32,
+                maxThreadsPerMultiProcessor = 2048,
+                canMapHostMemory = true,
+                multiGpuBoardGroupID = 0,
+                maxTexture2D = {
+                    131072,
+                    65536
+                },
+                maxThreadsDim = {
+                    1024,
+                    1024,
+                    64
+                },
+                regsPerBlock = 65536,
+                pciDomainID = 0,
+                clockRate = 1493000,
+                warpSize = 32,
+                maxGridSize = {
+                    2147483647,
+                    65535,
+                    65535
+                },
+                textureAlignment = 512,
+                maxTexture3DAlt = {
+                    8192,
+                    8192,
+                    32768
+                },
+                pageableMemoryAccessUsesHostPageTables = false,
+                asyncEngineCount = 1,
+                maxTexture2DMipmap = {
+                    32768,
+                    32768
+                },
+                pciDeviceID = 0,
+                integrated = false,
+                tccDriver = false,
+                maxTexture1D = 131072,
+                surfaceAlignment = 512,
+                memPitch = 2147483647,
+                maxTexture2DLayered = {
+                    32768,
+                    32768,
+                    2048
+                },
+                maxThreadsPerBlock = 1024,
+                isMultiGpuBoard = false,
+                cooperativeMultiDeviceLaunch = false,
+                texturePitchAlignment = 32,
+                ["$id"] = 0,
+                maxTexture2DGather = {
+                    32768,
+                    32768
+                },
+                computePreemptionSupported = true,
+                sharedMemPerMultiprocessor = 98304,
+                uuid = "4acdb63c-8eb6-f4ec-16ea-7c11e456b818",
+                maxSurface2DLayered = {
+                    32768,
+                    32768,
+                    2048
+                },
+                maxTexture1DLayered = {
+                    32768,
+                    2048
+                },
+                maxTexture3D = {
+                    16384,
+                    16384,
+                    16384
+                },
+                maxTexture1DLinear = 268435456,
+                maxSurface2D = {
+                    131072,
+                    65536
+                },
+                totalGlobalMem = 4294836224,
+                totalConstMem = 65536,
+                maxSurfaceCubemapLayered = {
+                    32768,
+                    2046
+                },
+                globalL1CacheSupported = true,
+                maxSurface3D = {
+                    16384,
+                    16384,
+                    16384
+                },
+                unifiedAddressing = true,
+                computeMode = 0,
+                memoryBusWidth = 128,
+                ECCEnabled = false,
+                maxSurfaceCubemap = 32768,
+                managedMemory = true,
+                l2CacheSize = 524288,
+                maxSurface1DLayered = {
+                    32768,
+                    2048
+                },
+                name = "NVIDIA GeForce GTX 1050",
+                kernelExecTimeoutEnabled = true,
+                deviceOverlap = true,
+                minor = 1,
+                maxTexture1DMipmap = 16384,
+                maxTextureCubemapLayered = {
+                    32768,
+                    2046
+                },
+                luidDeviceNodeMask = 0,
+                concurrentKernels = true,
+                luid = "0000000000000000",
+                maxTextureCubemap = 32768,
+                directManagedMemAccessFromHost = false,
+                cooperativeLaunch = true,
+                pciBusID = 1
+            }
+        },
+        succeed = true
+    }
+}

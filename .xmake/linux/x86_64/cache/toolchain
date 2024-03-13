@@ -1,0 +1,22 @@
+{
+    tool_target_cudaSaxpy_linux_x86_64_cu = {
+        toolname = "nvcc",
+        program = "/usr/local/cuda/bin/nvcc",
+        toolchain_info = {
+            plat = "linux",
+            name = "cuda",
+            cachekey = "cuda_arch_x86_64_plat_linux",
+            arch = "x86_64"
+        }
+    },
+    tool_target_cudaScan_linux_x86_64_cu = {
+        toolname = "nvcc",
+        program = "/usr/local/cuda/bin/nvcc",
+        toolchain_info = {
+            plat = "linux",
+            name = "cuda",
+            cachekey = "cuda_arch_x86_64_plat_linux",
+            arch = "x86_64"
+        }
+    }
+}

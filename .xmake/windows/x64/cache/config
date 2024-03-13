@@ -1,9 +1,11 @@
 {
     mtimes = {
-        ["asst3\\xmake.lua"] = 1710256827,
-        ["asst1\\xmake.lua"] = 1710257424,
-        ["xmake.lua"] = 1710257930
+        ["xmake.lua"] = 1710257930,
+        ["asst3\\xmake.lua"] = 1710331926,
+        ["asst1\\xmake.lua"] = 1710257424
     },
-    recheck = false,
-    options = { }
+    options = {
+        mode = "debug"
+    },
+    recheck = false
 }
