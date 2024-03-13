@@ -1,0 +1,8 @@
+{
+    cmdlines = {
+        "xmake build cudaSaxpy",
+        [[xmake lua C:\Users\53094\xmake\modules\private\utils\statistics.lua]],
+        "xmake build cudaSaxpy",
+        [[xmake lua C:\Users\53094\xmake\actions\build\cleaner.lua]]
+    }
+}

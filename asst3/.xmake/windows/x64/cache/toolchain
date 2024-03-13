@@ -1,0 +1,112 @@
+{
+    tool_target_cudaScan_windows_x64_cu = {
+        toolname = "nvcc",
+        program = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin\nvcc]],
+        toolchain_info = {
+            plat = "windows",
+            name = "cuda",
+            arch = "x64",
+            cachekey = "cuda_arch_x64_plat_windows"
+        }
+    },
+    tool_target_cudaSaxpy_windows_x64_cxx = {
+        toolname = "cl",
+        program = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]],
+        toolchain_info = {
+            plat = "windows",
+            name = "msvc",
+            arch = "x64",
+            cachekey = "msvc_arch_x64_plat_windows"
+        }
+    },
+    msvc_arch_x64_plat_windows = {
+        __global = true,
+        arch = "x64",
+        vcarchs = {
+            "arm64",
+            "x64",
+            "x86"
+        },
+        vs_sdkver = "10.0.22621.0",
+        vcvars = {
+            VS170COMNTOOLS = [[E:\software\visual studio2022\Common7\Tools\]],
+            INCLUDE = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\include;E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\ATLMFC\include;E:\software\visual studio2022\VC\Auxiliary\VS\include;E:\Windows Kits\10\include\10.0.22621.0\ucrt;E:\Windows Kits\10\\include\10.0.22621.0\\um;E:\Windows Kits\10\\include\10.0.22621.0\\shared;E:\Windows Kits\10\\include\10.0.22621.0\\winrt;E:\Windows Kits\10\\include\10.0.22621.0\\cppwinrt;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um]],
+            VCIDEInstallDir = [[E:\software\visual studio2022\Common7\IDE\VC\]],
+            VCInstallDir = [[E:\software\visual studio2022\VC\]],
+            VSInstallDir = [[E:\software\visual studio2022\]],
+            VisualStudioVersion = "17.0",
+            LIBPATH = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\ATLMFC\lib\x64;E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\lib\x64;E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\lib\x86\store\references;E:\Windows Kits\10\UnionMetadata\10.0.22621.0;E:\Windows Kits\10\References\10.0.22621.0;C:\Windows\Microsoft.NET\Framework64\v4.0.30319]],
+            WindowsSDKVersion = "10.0.22621.0",
+            ExtensionSdkDir = [[C:\Program Files (x86)\Microsoft SDKs\Windows Kits\10\ExtensionSDKs]],
+            VCToolsRedistDir = [[E:\software\visual studio2022\VC\Redist\MSVC\14.38.33130\]],
+            VCToolsVersion = "14.38.33130",
+            VSCMD_ARG_TGT_ARCH = "x64",
+            VSCMD_VER = "17.8.5",
+            WindowsSdkVerBinPath = [[E:\Windows Kits\10\bin\10.0.22621.0\]],
+            LIB = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\ATLMFC\lib\x64;E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\lib\x64;C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\lib\um\x64;E:\Windows Kits\10\lib\10.0.22621.0\ucrt\x64;E:\Windows Kits\10\\lib\10.0.22621.0\\um\x64]],
+            WindowsSdkBinPath = [[E:\Windows Kits\10\bin\]],
+            PATH = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64;E:\software\visual studio2022\Common7\IDE\VC\VCPackages;E:\software\visual studio2022\Common7\IDE\CommonExtensions\Microsoft\TestWindow;E:\software\visual studio2022\Common7\IDE\CommonExtensions\Microsoft\TeamFoundation\Team Explorer;E:\software\visual studio2022\MSBuild\Current\bin\Roslyn;E:\software\visual studio2022\Team Tools\Performance Tools\x64;E:\software\visual studio2022\Team Tools\Performance Tools;E:\visualstudio2019\Common\VSPerfCollectionTools\vs2019\\x64;E:\visualstudio2019\Common\VSPerfCollectionTools\vs2019\;C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\x64\;E:\software\visual studio2022\Common7\IDE\CommonExtensions\Microsoft\FSharp\Tools;E:\software\visual studio2022\Team Tools\DiagnosticsHub\Collector;E:\Windows Kits\10\bin\10.0.22621.0\\x64;E:\Windows Kits\10\bin\\x64;E:\software\visual studio2022\\MSBuild\Current\Bin\amd64;C:\Windows\Microsoft.NET\Framework64\v4.0.30319;E:\software\visual studio2022\Common7\IDE\;E:\software\visual studio2022\Common7\Tools\;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\libnvvp;E:\software\VMware\bin\;E:\software\java\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;E:\software\Mysql\mysql-8.0.21-winx64\bin;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;E:\software\neo4j\neo4j-community-4.2.4\bin;C:\Program Files\Git\cmd;E:\software\openssl\OpenSSL-Win64\bin;E:\software\openssl\OpenSSL-Win32\bin;E:\software\sqlite\sqlite-tools-win32-x86-3360000;E:\software\«·À…±∏∑›\AOMEI\AOMEI Backupper\6.5.0;C:\Program Files\dotnet\;E:\software\matlab\bin;E:\software\010editor\010 Editor;E:\software\matlab\MatLabRuntime\v911\runtime\win64;E:\software\curl\curl-7.85.0_5-win64-mingw\bin;E:\software\netcat\netcat-1.11;E:\software\node.js\;E:\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\NVIDIA Corporation\Nsight Compute 2024.1.0\;C:\Users\53094\AppData\Local\Programs\Python\Python36\Scripts\;C:\Users\53094\AppData\Local\Programs\Python\Python36\;E:\software\python\Scripts\;E:\software\python\;E:\application\mingw\bin;E:\software\jave-intellij\IntelliJ IDEA Community Edition 2019.3.1\bin;E:\software\fiddler;C:\Users\53094\AppData\Local\Microsoft\WindowsApps;E:\software\vscode\Microsoft VS Code\bin;E:\software\pycharm pro\PyCharm 2020.3.4\bin;;E:\software\pycharm pro\PyCharm 2020.3.4\bin;E:\software\Mysql\mysql-8.0.21-winx64\bin;E:\dachuang\Project\CourseSystem-master\venv;E:\software\neo4j\neo4j-community-4.2.4\bin;E:\software\java\bin;E:\software\webstorm\WebStorm 2020.3.3\bin;;E:\software\idea\IntelliJ IDEA 2021.1.3\bin;;E:\software\goproject\bin;C:\Users\53094\AppData\Roaming\npm;C:\Users\53094\.dotnet\tools;C:\Users\53094\xmake;E:\software\visual studio2022\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;E:\software\visual studio2022\Common7\IDE\CommonExtensions\Microsoft\CMake\Ninja;E:\software\visual studio2022\Common7\IDE\VC\Linux\bin\ConnectionManagerExe;E:\software\visual studio2022\VC\vcpkg]],
+            UCRTVersion = "10.0.22621.0",
+            DevEnvdir = [[E:\software\visual studio2022\Common7\IDE\]],
+            WindowsSdkDir = [[E:\Windows Kits\10\]],
+            VSCMD_ARG_app_plat = "Desktop",
+            VSCMD_ARG_HOST_ARCH = "x64",
+            WindowsLibPath = [[E:\Windows Kits\10\UnionMetadata\10.0.22621.0;E:\Windows Kits\10\References\10.0.22621.0]],
+            VCToolsInstallDir = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\]],
+            UniversalCRTSdkDir = [[E:\Windows Kits\10\]]
+        },
+        vs = "2022",
+        vs_toolset = "14.38.33130",
+        plat = "windows"
+    },
+    tool_target_cudaScan_windows_x64_ld = {
+        toolname = "link",
+        program = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]],
+        toolchain_info = {
+            plat = "windows",
+            name = "msvc",
+            arch = "x64",
+            cachekey = "msvc_arch_x64_plat_windows"
+        }
+    },
+    tool_target_cudaSaxpy_windows_x64_cu = {
+        toolname = "nvcc",
+        program = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin\nvcc]],
+        toolchain_info = {
+            plat = "windows",
+            name = "cuda",
+            arch = "x64",
+            cachekey = "cuda_arch_x64_plat_windows"
+        }
+    },
+    tool_target_cudaSaxpy_windows_x64_ld = {
+        toolname = "link",
+        program = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]],
+        toolchain_info = {
+            plat = "windows",
+            name = "msvc",
+            arch = "x64",
+            cachekey = "msvc_arch_x64_plat_windows"
+        }
+    },
+    tool_target_render_windows_x64_ld = {
+        toolname = "link",
+        program = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]],
+        toolchain_info = {
+            plat = "windows",
+            name = "msvc",
+            arch = "x64",
+            cachekey = "msvc_arch_x64_plat_windows"
+        }
+    },
+    tool_target_render_windows_x64_cu = {
+        toolname = "nvcc",
+        program = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin\nvcc]],
+        toolchain_info = {
+            plat = "windows",
+            name = "cuda",
+            arch = "x64",
+            cachekey = "cuda_arch_x64_plat_windows"
+        }
+    }
+}

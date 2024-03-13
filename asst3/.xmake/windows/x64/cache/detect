@@ -1,0 +1,326 @@
+{
+    find_program = {
+        ["cl.exe"] = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]],
+        ["E:\\software\\visual studio2022\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe"] = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]],
+        nvcc = "nvcc",
+        ["C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc"] = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin\nvcc]],
+        zig = false
+    },
+    ["detect.tools.nvcc.has_flags"] = {
+        ["C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc_12.4"] = {
+            ["--Wno-deprecated-declarations"] = true,
+            ["-MF"] = true,
+            ["--compile"] = true,
+            ["--ftemplate-backtrace-limit"] = true,
+            ["--entries"] = true,
+            ["--split-compile-extended"] = true,
+            ["--verbose"] = true,
+            ["--device-w"] = true,
+            ["--Wreorder"] = true,
+            ["--cudart"] = true,
+            ["--resource-usage"] = true,
+            ["-forward-unknown-opts"] = true,
+            ["--forward-unknown-to-host-linker"] = true,
+            ["--output-directory"] = true,
+            ["--list-gpu-arch"] = true,
+            ["--archiver-binary"] = true,
+            ["-bar"] = true,
+            ["--source-in-ptx"] = true,
+            ["--jump-table-density"] = true,
+            ["--objdir-as-tempdir"] = true,
+            ["--allow-unsupported-compiler"] = true,
+            ["--device-debug"] = true,
+            ["-gencode"] = true,
+            ["--lib"] = true,
+            ["-dlto"] = true,
+            ["--run"] = true,
+            ["--device-c"] = true,
+            ["--split-compile"] = true,
+            ["--nvlink-options"] = true,
+            ["--optimization-info"] = true,
+            ["--diag-error"] = true,
+            ["--optix-ir"] = true,
+            ["--profile"] = true,
+            ["--Wext-lambda-captures-this"] = true,
+            ["--no-display-error-number"] = true,
+            ["--cudadevrt"] = true,
+            ["--dlink-time-opt"] = true,
+            ["--keep"] = true,
+            ["--dependency-output"] = true,
+            ["--ptx"] = true,
+            ["--extensible-whole-program"] = true,
+            ["--cuda"] = true,
+            ["--Wmissing-launch-bounds"] = true,
+            ["--extended-lambda"] = true,
+            ["--list-gpu-code"] = true,
+            ["--define-macro"] = true,
+            ["--target-directory"] = true,
+            ["--fmad"] = true,
+            ["--ptxas-options"] = true,
+            ["--compiler-options"] = true,
+            ["-dw"] = true,
+            ["--optimize"] = true,
+            ["--library"] = true,
+            ["--Wdefault-stream-launch"] = true,
+            ["--x"] = true,
+            ["--restrict"] = true,
+            ["--diag-warn"] = true,
+            ["--device-link"] = true,
+            ["--no-compress"] = true,
+            ["-forward-unknown-to-host-compiler"] = true,
+            ["--dependency-target-name"] = true,
+            ["--compile-as-tools-patch"] = true,
+            ["--forward-unknown-opts"] = true,
+            ["--maxrregcount"] = true,
+            ["--ftemplate-depth"] = true,
+            ["--no-align-double"] = true,
+            ["--generate-line-info"] = true,
+            ["--compiler-bindir"] = true,
+            ["--forward-unknown-to-host-compiler"] = true,
+            ["--prec-sqrt"] = true,
+            ["--generate-code"] = true,
+            ["--dryrun"] = true,
+            ["--machine"] = true,
+            ["--Wno-deprecated-gpu-targets"] = true,
+            ["--no-device-link"] = true,
+            ["--fatbin"] = true,
+            ["--dependency-drive-prefix"] = true,
+            ["--dopt"] = true,
+            ["--include-path"] = true,
+            ["-code"] = true,
+            ["-dc"] = true,
+            ["--std"] = true,
+            ["-arch"] = true,
+            ["--use-local-env"] = true,
+            ["--gpu-architecture"] = true,
+            ["--archive-options"] = true,
+            ["--keep-dir"] = true,
+            ["--Werror"] = true,
+            ["--no-host-device-move-forward"] = true,
+            ["--options-file"] = true,
+            ["--clean-targets"] = true,
+            ["--time"] = true,
+            ["--undefine-macro"] = true,
+            ["--diag-suppress"] = true,
+            ["--expt-extended-lambda"] = true,
+            ["--lto"] = true,
+            ["--threads"] = true,
+            ["--relocatable-device-code"] = true,
+            ["--generate-dependencies"] = true,
+            ["-dlink"] = true,
+            ["--display-error-number"] = true,
+            ["--no-exceptions"] = true,
+            ["--pre-include"] = true,
+            ["--preprocess"] = true,
+            ["--default-stream"] = true,
+            ["-o"] = true,
+            ["--extra-device-vectorization"] = true,
+            ["--m64"] = true,
+            ["--gen-opt-lto"] = true,
+            ["--cubin"] = true,
+            ["--fdevice-syntax-only"] = true,
+            ["-lineinfo"] = true,
+            ["--link"] = true,
+            ["--input-drive-prefix"] = true,
+            ["--drive-prefix"] = true,
+            ["-forward-unknown-to-host-linker"] = true,
+            ["--save-temps"] = true,
+            ["--run-args"] = true,
+            ["--gpu-code"] = true,
+            ["--ftz"] = true,
+            ["--libdevice-directory"] = true,
+            ["--version"] = true,
+            ["--shared"] = true,
+            ["--generate-dependency-targets"] = true,
+            ["--generate-dependencies-with-compile"] = true,
+            ["--brief-diagnostics"] = true,
+            ["--keep-device-functions"] = true,
+            ["--expt-relaxed-constexpr"] = true,
+            ["--dont-use-profile"] = true,
+            ["--linker-options"] = true,
+            ["--prec-div"] = true,
+            ["--help"] = true,
+            ["--no-host-device-initializer-list"] = true,
+            ["--library-path"] = true,
+            ["--output-file"] = true,
+            ["--disable-warnings"] = true,
+            ["--system-include"] = true,
+            ["--debug"] = true
+        }
+    },
+    find_programver = {
+        ["E:\\software\\visual studio2022\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe"] = false,
+        ["C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc"] = "12.4"
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolld = {
+        ["link.exe"] = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\link.exe]]
+    },
+    find_program_msvc_arch_x64_plat_windows_checktoolcxx = {
+        ["cl.exe"] = [[E:\software\visual studio2022\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\cl.exe]]
+    },
+    find_cudadevices = {
+        succeed = true,
+        data = {
+            {
+                maxSurface1DLayered = {
+                    32768,
+                    2048
+                },
+                pciBusID = 1,
+                ["$flops"] = 955520000,
+                maxSurface2D = {
+                    131072,
+                    65536
+                },
+                maxTexture1DMipmap = 16384,
+                textureAlignment = 512,
+                uuid = "4acdb63c-8eb6-f4ec-16ea-7c11e456b818",
+                kernelExecTimeoutEnabled = true,
+                totalConstMem = 65536,
+                memoryBusWidth = 128,
+                maxSurfaceCubemap = 32768,
+                maxThreadsPerMultiProcessor = 2048,
+                sharedMemPerBlock = 49152,
+                pageableMemoryAccessUsesHostPageTables = false,
+                directManagedMemAccessFromHost = false,
+                maxSurface3D = {
+                    16384,
+                    16384,
+                    16384
+                },
+                canUseHostPointerForRegisteredMem = false,
+                maxGridSize = {
+                    2147483647,
+                    65535,
+                    65535
+                },
+                regsPerBlock = 65536,
+                singleToDoublePrecisionPerfRatio = 32,
+                memPitch = 2147483647,
+                maxThreadsDim = {
+                    1024,
+                    1024,
+                    64
+                },
+                maxSurface1D = 32768,
+                maxTextureCubemapLayered = {
+                    32768,
+                    2046
+                },
+                streamPrioritiesSupported = true,
+                ECCEnabled = false,
+                sharedMemPerBlockOptin = 49152,
+                texturePitchAlignment = 32,
+                multiGpuBoardGroupID = 0,
+                maxTexture1D = 131072,
+                localL1CacheSupported = true,
+                warpSize = 32,
+                integrated = false,
+                concurrentManagedAccess = false,
+                regsPerMultiprocessor = 65536,
+                maxTexture3DAlt = {
+                    8192,
+                    8192,
+                    32768
+                },
+                maxTexture3D = {
+                    16384,
+                    16384,
+                    16384
+                },
+                totalGlobalMem = 4294836224,
+                major = 6,
+                asyncEngineCount = 1,
+                computePreemptionSupported = true,
+                globalL1CacheSupported = true,
+                maxTexture2DGather = {
+                    32768,
+                    32768
+                },
+                l2CacheSize = 524288,
+                maxTextureCubemap = 32768,
+                maxTexture2DMipmap = {
+                    32768,
+                    32768
+                },
+                canMapHostMemory = true,
+                isMultiGpuBoard = false,
+                memoryClockRate = 3504000,
+                tccDriver = false,
+                concurrentKernels = true,
+                computeMode = 0,
+                maxTexture2DLinear = {
+                    131072,
+                    65000,
+                    2097120
+                },
+                multiProcessorCount = 5,
+                pageableMemoryAccess = false,
+                unifiedAddressing = true,
+                ["$id"] = 0,
+                pciDomainID = 0,
+                managedMemory = true,
+                deviceOverlap = true,
+                maxTexture1DLinear = 268435456,
+                maxSurfaceCubemapLayered = {
+                    32768,
+                    2046
+                },
+                sharedMemPerMultiprocessor = 98304,
+                surfaceAlignment = 512,
+                cooperativeLaunch = true,
+                name = "NVIDIA GeForce GTX 1050",
+                minor = 1,
+                maxTexture2DLayered = {
+                    32768,
+                    32768,
+                    2048
+                },
+                maxTexture1DLayered = {
+                    32768,
+                    2048
+                },
+                pciDeviceID = 0,
+                maxThreadsPerBlock = 1024,
+                clockRate = 1493000,
+                maxSurface2DLayered = {
+                    32768,
+                    32768,
+                    2048
+                },
+                luidDeviceNodeMask = 1,
+                luid = "3765010000000000",
+                cooperativeMultiDeviceLaunch = false,
+                maxTexture2D = {
+                    131072,
+                    65536
+                }
+            }
+        }
+    },
+    ["lib.detect.has_flags"] = {
+        ["windows_x64_C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc_12.4_cu_cuflags__-rdc=true"] = true,
+        ["windows_x64_C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc_12.4_cu___-O3"] = true,
+        ["windows_x64_E:\\software\\visual studio2022\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe__cxx_cxflags_-nologo_cl_sourceDependencies"] = true,
+        ["windows_x64_E:\\software\\visual studio2022\\VC\\Tools\\MSVC\\14.38.33130\\bin\\HostX64\\x64\\cl.exe__cxx__-nologo_-O2 -fp:fast"] = true,
+        ["windows_x64_C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc_12.4_cu_cuflags__-gencode arch=compute_61,code=sm_61"] = true,
+        ["windows_x64_C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.4\\bin\\nvcc_12.4_cu_cuflags__-MD -MF"] = true
+    },
+    ["detect.sdks.find_cuda"] = {
+        cuda = {
+            bindir = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin]],
+            sdkdir = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4]],
+            linkdirs = {
+                [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\lib\x64]]
+            },
+            msbuildextensionsdir = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\extras\visual_studio_integration\MSBuildExtensions]],
+            version = "12.4",
+            includedirs = {
+                [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\include]]
+            }
+        }
+    },
+    find_program_cuda_arch_x64_plat_windows_checktoolcu = {
+        nvcc = [[C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin\nvcc]]
+    }
+}
