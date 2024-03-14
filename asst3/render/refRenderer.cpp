@@ -9,7 +9,8 @@
 #include "sceneLoader.h"
 #include "util.h"
 
-RefRenderer::RefRenderer() {
+RefRenderer::RefRenderer()
+{
     image = NULL;
 
     numCircles = 0;
@@ -19,27 +20,31 @@ RefRenderer::RefRenderer() {
     radius = NULL;
 }
 
-RefRenderer::~RefRenderer() {
+RefRenderer::~RefRenderer()
+{
 
-    if (image) {
+    if (image)
+    {
         delete image;
     }
 
-    if (position) {
-        delete [] position;
-        delete [] velocity;
-        delete [] color;
-        delete [] radius;
+    if (position)
+    {
+        delete[] position;
+        delete[] velocity;
+        delete[] color;
+        delete[] radius;
     }
 }
 
-const Image*
-RefRenderer::getImage() {
+const Image *
+RefRenderer::getImage()
+{
     return image;
 }
 
-void
-RefRenderer::setup() {
+void RefRenderer::setup()
+{
     // nothing to do here
 }
 
@@ -47,8 +52,8 @@ RefRenderer::setup() {
 //
 // Allocate buffer the renderer will render into.  Check status of
 // image first to avoid memory leak.
-void
-RefRenderer::allocOutputImage(int width, int height) {
+void RefRenderer::allocOutputImage(int width, int height)
+{
 
     if (image)
         delete image;
@@ -59,30 +64,35 @@ RefRenderer::allocOutputImage(int width, int height) {
 //
 // Clear's the renderer's target image.  The state of the image after
 // the clear depends on the scene being rendered.
-void
-RefRenderer::clearImage() {
+void RefRenderer::clearImage()
+{
 
     // clear image to white unless this is the snowflake scene.  For
     // the snowflake clear the image to a more pleasing color ramp
 
-    if (sceneName == SNOWFLAKES || sceneName == SNOWFLAKES_SINGLE_FRAME) {
+    if (sceneName == SNOWFLAKES || sceneName == SNOWFLAKES_SINGLE_FRAME)
+    {
 
-        for (int j=0; j<image->height; j++) {
-            float* ptr = image->data + (4 * j * image->width);
-            float shade = .4f + .45f * static_cast<float>(image->height-j) / image->height;
-            for (int i=0; i<image->width; i++) {
+        for (int j = 0; j < image->height; j++)
+        {
+            float *ptr = image->data + (4 * j * image->width);
+            float shade = .4f + .45f * static_cast<float>(image->height - j) / image->height;
+            for (int i = 0; i < image->width; i++)
+            {
                 ptr[0] = ptr[1] = ptr[2] = shade;
                 ptr[3] = 1.f;
                 ptr += 4;
             }
         }
-    } else {
+    }
+    else
+    {
         image->clear(1.f, 1.f, 1.f, 1.f);
     }
 }
 
-void
-RefRenderer::loadScene(SceneName scene) {
+void RefRenderer::loadScene(SceneName scene)
+{
     sceneName = scene;
     loadCircleScene(sceneName, numCircles, position, velocity, color, radius);
 }
@@ -91,31 +101,33 @@ RefRenderer::loadScene(SceneName scene) {
 //
 // Advance the simulation one time step.  Updates all circle positions
 // and velocities
-void
-RefRenderer::advanceAnimation() {
+void RefRenderer::advanceAnimation()
+{
 
     // only the snowflake scene has animation
 
-    if (sceneName == SNOWFLAKES) {
+    if (sceneName == SNOWFLAKES)
+    {
 
         const float dt = 1.f / 60.f;
         const float kGravity = -1.8f; // sorry Newton
         const float kDragCoeff = 2.f;
 
-        for (int i=0; i<numCircles; i++) {
+        for (int i = 0; i < numCircles; i++)
+        {
 
             int index3 = 3 * i;
 
             // hack to make farther circles move more slowly, giving the
             // illusion of parallax
-            float forceScaling = CLAMP(1.f - position[index3+2], .1f, 1.f);
+            float forceScaling = CLAMP(1.f - position[index3 + 2], .1f, 1.f);
 
             // add some noise to the motion to make the snow flutter
             float noiseInput[3];
             float noiseForce[2];
             noiseInput[0] = 10.f * position[index3];
-            noiseInput[1] = 10.f * position[index3+1];
-            noiseInput[2] = 255.f * position[index3+2];
+            noiseInput[1] = 10.f * position[index3 + 1];
+            noiseInput[2] = 255.f * position[index3 + 2];
             vec2CellNoise(noiseInput, noiseForce, i);
             noiseForce[0] *= 7.5f;
             noiseForce[1] *= 5.f;
@@ -123,135 +135,150 @@ RefRenderer::advanceAnimation() {
             // drag
             float dragForce[3];
             dragForce[0] = -1.f * kDragCoeff * velocity[index3];
-            dragForce[1] = -1.f * kDragCoeff * velocity[index3+1];
+            dragForce[1] = -1.f * kDragCoeff * velocity[index3 + 1];
 
             // update positions
-            position[index3]   += velocity[index3] * dt;
-            position[index3+1] += velocity[index3+1] * dt;
-            position[index3+2] += velocity[index3+2] * dt;
+            position[index3] += velocity[index3] * dt;
+            position[index3 + 1] += velocity[index3 + 1] * dt;
+            position[index3 + 2] += velocity[index3 + 2] * dt;
 
             // update forces
-            velocity[index3]   += forceScaling * (noiseForce[0] + dragForce[0]) * dt;
-            velocity[index3+1] += forceScaling * (kGravity + noiseForce[1] + dragForce[1]) * dt;
+            velocity[index3] += forceScaling * (noiseForce[0] + dragForce[0]) * dt;
+            velocity[index3 + 1] += forceScaling * (kGravity + noiseForce[1] + dragForce[1]) * dt;
 
             // if the snowflake has moved off the left, right or bottom of
             // the screen, place it back at the top and give it a
             // pseudorandom x position and velocity.
-            if ( (position[index3+1] + radius[i] < 0.f) ||
-                 (position[index3]+radius[i]) < -0.f ||
-                 (position[index3]-radius[i]) > 1.f)
+            if ((position[index3 + 1] + radius[i] < 0.f) ||
+                (position[index3] + radius[i]) < -0.f ||
+                (position[index3] - radius[i]) > 1.f)
             {
                 noiseInput[0] = 255.f * position[index3];
-                noiseInput[1] = 255.f * position[index3+1];
-                noiseInput[2] = 255.f * position[index3+2];
+                noiseInput[1] = 255.f * position[index3 + 1];
+                noiseInput[2] = 255.f * position[index3 + 2];
                 vec2CellNoise(noiseInput, noiseForce, i);
 
                 position[index3] = .5f + .5f * noiseForce[0];
-                position[index3+1] = 1.35f + radius[i];
+                position[index3 + 1] = 1.35f + radius[i];
 
                 // restart from 0 vertical velocity.  Choose a
                 // pseudo-random horizontal velocity.
                 velocity[index3] = 2.f * noiseForce[1];
-                velocity[index3+1] = 0.f;
+                velocity[index3 + 1] = 0.f;
             }
         }
-    } else if (sceneName == BOUNCING_BALLS) {
+    }
+    else if (sceneName == BOUNCING_BALLS)
+    {
         const float dt = 1.f / 60.f;
         const float kGravity = -2.8f; // sorry Newton
-        const float kDragCoeff = -0.8f; 
-        const float epsilon = 0.001f; 
+        const float kDragCoeff = -0.8f;
+        const float epsilon = 0.001f;
 
-        for (int i=0; i<numCircles; i++) {
+        for (int i = 0; i < numCircles; i++)
+        {
             int index3 = 3 * i;
 
             // reverse velocity if center position < 0
-            float oldVelocity = velocity[index3+1]; 
-            float oldPosition = position[index3+1]; 
+            float oldVelocity = velocity[index3 + 1];
+            float oldPosition = position[index3 + 1];
 
-            if (oldVelocity == 0.f && oldPosition == 0.f) { // stop-condition 
-                continue; 
+            if (oldVelocity == 0.f && oldPosition == 0.f)
+            { // stop-condition
+                continue;
             }
 
-            if (position[index3+1] < 0 && oldVelocity < 0.f) { // bounce ball 
-                velocity[index3+1] *= kDragCoeff; 
+            if (position[index3 + 1] < 0 && oldVelocity < 0.f)
+            { // bounce ball
+                velocity[index3 + 1] *= kDragCoeff;
             }
 
             // update velocity: v = u + at (only along y-axis)
-            velocity[index3+1] += kGravity * dt; 
+            velocity[index3 + 1] += kGravity * dt;
 
             // update positions (only along y-axis)
-            position[index3+1] += velocity[index3+1] * dt;
+            position[index3 + 1] += velocity[index3 + 1] * dt;
 
-            if (fabsf(velocity[index3+1] - oldVelocity) < epsilon 
-                    && oldPosition < 0.0f 
-                    && fabsf(position[index3+1]-oldPosition) < epsilon) { // stop ball 
-                velocity[index3+1] = 0.f; 
-                position[index3+1] = 0.f; 
-            } 
-        }
-    } else if (sceneName == HYPNOSIS) { 
-        float cutOff = 0.5f;  
-        for (int i = 0; i < numCircles; i++) { // update radius 
-            // place circle back in center after reaching threshold radisus 
-            if (radius[i] > cutOff) { 
-                radius[i] = 0.02f; 
-            } else { 
-                radius[i] += 0.01f; 
+            if (fabsf(velocity[index3 + 1] - oldVelocity) < epsilon && oldPosition < 0.0f && fabsf(position[index3 + 1] - oldPosition) < epsilon)
+            { // stop ball
+                velocity[index3 + 1] = 0.f;
+                position[index3 + 1] = 0.f;
             }
         }
-    } else if (sceneName == FIREWORKS) {
+    }
+    else if (sceneName == HYPNOSIS)
+    {
+        float cutOff = 0.5f;
+        for (int i = 0; i < numCircles; i++)
+        { // update radius
+            // place circle back in center after reaching threshold radisus
+            if (radius[i] > cutOff)
+            {
+                radius[i] = 0.02f;
+            }
+            else
+            {
+                radius[i] += 0.01f;
+            }
+        }
+    }
+    else if (sceneName == FIREWORKS)
+    {
         const float dt = 1.f / 60.f;
         const float pi = 3.14159;
-        const float maxDist = 0.25f; 
+        const float maxDist = 0.25f;
 
-        for (int i = 0; i < NUM_FIREWORKS; i++) { 
+        for (int i = 0; i < NUM_FIREWORKS; i++)
+        {
             int index3i = 3 * i;
             // fire-work center
-            float cx = position[index3i]; 
-            float cy = position[index3i+1]; 
-            for (int j = 0; j < NUM_SPARKS; j++) { 
+            float cx = position[index3i];
+            float cy = position[index3i + 1];
+            for (int j = 0; j < NUM_SPARKS; j++)
+            {
                 int sIdx = NUM_FIREWORKS + i * NUM_SPARKS + j;
                 int index3j = 3 * sIdx;
-                
+
                 // update position
-                position[index3j] += velocity[index3j] * dt;  
-                position[index3j+1] += velocity[index3j+1] * dt; 
+                position[index3j] += velocity[index3j] * dt;
+                position[index3j + 1] += velocity[index3j + 1] * dt;
 
                 // fire-work sparks
-                float sx = position[index3j]; 
-                float sy = position[index3j+1];
+                float sx = position[index3j];
+                float sy = position[index3j + 1];
 
                 // compute vector from firework-spark
-                float cxsx = sx - cx; 
+                float cxsx = sx - cx;
                 float cysy = sy - cy;
-    
-                // compute distance from fire-work 
+
+                // compute distance from fire-work
                 float dist = sqrt(cxsx * cxsx + cysy * cysy);
-                if (dist > maxDist) { // restore to starting position 
+                if (dist > maxDist)
+                { // restore to starting position
                     // random starting position on fire-work's rim
-                    float angle = (j * 2 * pi)/NUM_SPARKS;
-                    float sinA = sin(angle); 
-                    float cosA = cos(angle); 
-                    float x = cosA * radius[i]; 
-                    float y = sinA * radius[i]; 
+                    float angle = (j * 2 * pi) / NUM_SPARKS;
+                    float sinA = sin(angle);
+                    float cosA = cos(angle);
+                    float x = cosA * radius[i];
+                    float y = sinA * radius[i];
 
-                    position[index3j] = position[index3i] + x;  
-                    position[index3j+1] = position[index3i+1] + y;  
-                    position[index3j+2] = 0.0f; 
+                    position[index3j] = position[index3i] + x;
+                    position[index3j + 1] = position[index3i + 1] + y;
+                    position[index3j + 2] = 0.0f;
 
-                    // travel scaled unit length 
-                    velocity[index3j] = cosA/5.0;  
-                    velocity[index3j+1] = sinA/5.0; 
-                    velocity[index3j+2] = 0.0f;  
-                } 
+                    // travel scaled unit length
+                    velocity[index3j] = cosA / 5.0;
+                    velocity[index3j + 1] = sinA / 5.0;
+                    velocity[index3j + 2] = 0.0f;
+                }
             }
-        } 
-
-    } 
+        }
+    }
 }
 
 static inline void
-lookupColor(float coord, float& r, float& g, float& b) {
+lookupColor(float coord, float &r, float &g, float &b)
+{
 
     const int N = 5;
 
@@ -263,18 +290,18 @@ lookupColor(float coord, float& r, float& g, float& b) {
         {.8f, 0.8f, 1.f},
     };
 
-    float scaledCoord = coord * (N-1);
+    float scaledCoord = coord * (N - 1);
 
-    int base = std::min(static_cast<int>(scaledCoord), N-1);
+    int base = std::min(static_cast<int>(scaledCoord), N - 1);
 
     // linearly interpolate between values in the table based on the
     // value of coord
     float weight = scaledCoord - static_cast<float>(base);
     float oneMinusWeight = 1.f - weight;
 
-    r = (oneMinusWeight * lookupTable[base][0]) + (weight * lookupTable[base+1][0]);
-    g = (oneMinusWeight * lookupTable[base][1]) + (weight * lookupTable[base+1][1]);
-    b = (oneMinusWeight * lookupTable[base][2]) + (weight * lookupTable[base+1][2]);
+    r = (oneMinusWeight * lookupTable[base][0]) + (weight * lookupTable[base + 1][0]);
+    g = (oneMinusWeight * lookupTable[base][1]) + (weight * lookupTable[base + 1][1]);
+    b = (oneMinusWeight * lookupTable[base][2]) + (weight * lookupTable[base + 1][2]);
 }
 
 // shadePixel --
@@ -283,16 +310,15 @@ lookupColor(float coord, float& r, float& g, float& b) {
 // given pixel.  All values are provided in normalized space, where
 // the screen spans [0,1]^2.  The color/opacity of the circle is
 // computed at the pixel center.
-void
-RefRenderer::shadePixel(
+void RefRenderer::shadePixel(
     int circleIndex,
     float pixelCenterX, float pixelCenterY,
     float px, float py, float pz,
-    float* pixelData)
+    float *pixelData)
 {
     float diffX = px - pixelCenterX;
     float diffY = py - pixelCenterY;
-    float pixelDist = diffX * diffX + diffY * diffY;
+    float pixelDist = diffX * diffX + diffY * diffY; // 两点间到直线的距离的平方
 
     float rad = radius[circleIndex];
     float maxDist = rad * rad;
@@ -305,7 +331,8 @@ RefRenderer::shadePixel(
     float alpha;
 
     // there is a non-zero contribution.  Now compute the shading
-    if (sceneName == SNOWFLAKES || sceneName == SNOWFLAKES_SINGLE_FRAME) {
+    if (sceneName == SNOWFLAKES || sceneName == SNOWFLAKES_SINGLE_FRAME)
+    {
 
         // Snowflake opacity falls off with distance from center.
         // Snowflake color is determined by distance from center and
@@ -318,16 +345,17 @@ RefRenderer::shadePixel(
         float normPixelDist = sqrt(pixelDist) / rad;
         lookupColor(normPixelDist, colR, colG, colB);
 
-        float maxAlpha = kCircleMaxAlpha * CLAMP(.6f + .4f * (1.f-pz), 0.f, 1.f);
+        float maxAlpha = kCircleMaxAlpha * CLAMP(.6f + .4f * (1.f - pz), 0.f, 1.f);
         alpha = maxAlpha * exp(-1.f * falloffScale * normPixelDist * normPixelDist);
-
-    } else {
+    }
+    else
+    {
 
         // simple: each circle has an assigned color
         int index3 = 3 * circleIndex;
         colR = color[index3];
-        colG = color[index3+1];
-        colB = color[index3+2];
+        colG = color[index3 + 1];
+        colB = color[index3 + 2];
         alpha = .5f;
     }
 
@@ -351,21 +379,22 @@ RefRenderer::shadePixel(
     pixelData[3] += alpha;
 }
 
-void
-RefRenderer::render() {
+void RefRenderer::render()
+{
 
     // render all circles
-    for (int circleIndex=0; circleIndex<numCircles; circleIndex++) {
+    for (int circleIndex = 0; circleIndex < numCircles; circleIndex++)
+    {
 
         int index3 = 3 * circleIndex;
 
         float px = position[index3];
-        float py = position[index3+1];
-        float pz = position[index3+2];
+        float py = position[index3 + 1];
+        float pz = position[index3 + 2];
         float rad = radius[circleIndex];
 
         // compute the bounding box of the circle.  This bounding box
-        // is in normalized coordinates
+        // is in normalized coordinates [0-1]
         float minX = px - rad;
         float maxX = px + rad;
         float minY = py - rad;
@@ -374,9 +403,9 @@ RefRenderer::render() {
         // convert normalized coordinate bounds to integer screen
         // pixel bounds.  Clamp to the edges of the screen.
         int screenMinX = CLAMP(static_cast<int>(minX * image->width), 0, image->width);
-        int screenMaxX = CLAMP(static_cast<int>(maxX * image->width)+1, 0, image->width);
+        int screenMaxX = CLAMP(static_cast<int>(maxX * image->width) + 1, 0, image->width);
         int screenMinY = CLAMP(static_cast<int>(minY * image->height), 0, image->height);
-        int screenMaxY = CLAMP(static_cast<int>(maxY * image->height)+1, 0, image->height);
+        int screenMaxY = CLAMP(static_cast<int>(maxY * image->height) + 1, 0, image->height);
 
         float invWidth = 1.f / image->width;
         float invHeight = 1.f / image->height;
@@ -386,12 +415,14 @@ RefRenderer::render() {
         // the function shadePixel.  Since the circle does not fill
         // the bounding box entirely, not every pixel in the box will
         // receive contribution.
-        for (int pixelY=screenMinY; pixelY<screenMaxY; pixelY++) {
+        for (int pixelY = screenMinY; pixelY < screenMaxY; pixelY++)
+        {
 
             // pointer to pixel data
-            float* imgPtr = &image->data[4 * (pixelY * image->width + screenMinX)];
+            float *imgPtr = &image->data[4 * (pixelY * image->width + screenMinX)];
 
-            for (int pixelX=screenMinX; pixelX<screenMaxX; pixelX++) {
+            for (int pixelX = screenMinX; pixelX < screenMaxX; pixelX++)
+            {
 
                 // When "shading" the pixel ("shading" = computing the
                 // circle's color and opacity at the pixel), we treat
@@ -401,7 +432,7 @@ RefRenderer::render() {
                 // normalized [0,1]^2 coordinate space, so we convert
                 // the pixel center into this coordinate space prior
                 // to calling shadePixel.
-                float pixelCenterNormX = invWidth * (static_cast<float>(pixelX) + 0.5f);
+                float pixelCenterNormX = invWidth * (static_cast<float>(pixelX) + 0.5f); // 将像素视为在中间位置
                 float pixelCenterNormY = invHeight * (static_cast<float>(pixelY) + 0.5f);
                 shadePixel(circleIndex, pixelCenterNormX, pixelCenterNormY, px, py, pz, imgPtr);
                 imgPtr += 4;
@@ -410,17 +441,18 @@ RefRenderer::render() {
     }
 }
 
-void RefRenderer::dumpParticles(const char* filename) {
+void RefRenderer::dumpParticles(const char *filename)
+{
 
-    FILE* output = fopen(filename, "w");
+    FILE *output = fopen(filename, "w");
 
     fprintf(output, "%d\n", numCircles);
-    for (int i=0; i<numCircles; i++) {
+    for (int i = 0; i < numCircles; i++)
+    {
         fprintf(output, "%f %f %f   %f %f %f   %f\n",
-                position[3*i+0], position[3*i+1], position[3*i+2],
-                velocity[3*i+0], velocity[3*i+1], velocity[3*i+2],
+                position[3 * i + 0], position[3 * i + 1], position[3 * i + 2],
+                velocity[3 * i + 0], velocity[3 * i + 1], velocity[3 * i + 2],
                 radius[i]);
     }
     fclose(output);
-
 }

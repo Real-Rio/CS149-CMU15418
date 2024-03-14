@@ -1,11 +1,13 @@
 {
+    options = {
+        mode = "release",
+        plat = "windows",
+        arch = "x64"
+    },
+    recheck = false,
     mtimes = {
         ["xmake.lua"] = 1710257930,
-        ["asst3\\xmake.lua"] = 1710331926,
+        ["asst3\\xmake.lua"] = 1710406335,
         ["asst1\\xmake.lua"] = 1710257424
-    },
-    options = {
-        mode = "debug"
-    },
-    recheck = false
+    }
 }
