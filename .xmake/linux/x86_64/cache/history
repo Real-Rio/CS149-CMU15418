@@ -2,6 +2,18 @@
     cmdlines = {
         "xmake lua /usr/share/xmake/modules/private/utils/statistics.lua",
         "xmake lua /usr/share/xmake/actions/build/cleaner.lua",
-        "xmake build cadaScan"
+        "xmake build cadaScan",
+        "xmake build cudaScan",
+        "xmake lua /usr/share/xmake/actions/build/cleaner.lua",
+        "xmake build cudaScan",
+        "xmake run cudaScan",
+        "xmake run cudaScan -i",
+        "xmake build render",
+        "xmake build render",
+        "xmake build render",
+        "xmake build render",
+        "xmake build render",
+        "xmake run render",
+        "xmake run render rgb"
     }
 }

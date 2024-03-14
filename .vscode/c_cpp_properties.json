@@ -24,6 +24,15 @@
             ],
             "compilerPath": "E:\\application\\mingw\\bin\\gcc.exe",
             "intelliSenseMode": "windows-gcc-x86"
+        },
+        {
+            "name": "linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
