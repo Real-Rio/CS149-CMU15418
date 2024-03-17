@@ -1,9 +1,13 @@
 {
+    recheck = false,
+    options = {
+        plat = "linux",
+        arch = "x86_64",
+        mode = "release"
+    },
     mtimes = {
         ["xmake.lua"] = 1710422019,
-        ["asst3/xmake.lua"] = 1710427099,
-        ["asst1/xmake.lua"] = 1710422019
-    },
-    recheck = false,
-    options = { }
+        ["asst1/xmake.lua"] = 1710422019,
+        ["asst3/xmake.lua"] = 1710427361
+    }
 }

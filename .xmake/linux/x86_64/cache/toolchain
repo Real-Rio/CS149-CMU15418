@@ -1,62 +1,62 @@
 {
     tool_target_render_linux_x86_64_culd = {
-        toolname = "nvcc",
         program = "/usr/local/cuda/bin/nvcc",
+        toolname = "nvcc",
         toolchain_info = {
             name = "cuda",
-            arch = "x86_64",
             cachekey = "cuda_arch_x86_64_plat_linux",
-            plat = "linux"
-        }
-    },
-    tool_target_render_linux_x86_64_cu = {
-        toolname = "nvcc",
-        program = "/usr/local/cuda/bin/nvcc",
-        toolchain_info = {
-            name = "cuda",
-            arch = "x86_64",
-            cachekey = "cuda_arch_x86_64_plat_linux",
-            plat = "linux"
+            plat = "linux",
+            arch = "x86_64"
         }
     },
     tool_target_render_linux_x86_64_cxx = {
-        toolname = "gcc",
         program = "/usr/bin/gcc",
+        toolname = "gcc",
         toolchain_info = {
             name = "gcc",
-            arch = "x86_64",
             cachekey = "gcc_arch_x86_64_plat_linux",
-            plat = "linux"
+            plat = "linux",
+            arch = "x86_64"
+        }
+    },
+    tool_target_render_linux_x86_64_cu = {
+        program = "/usr/local/cuda/bin/nvcc",
+        toolname = "nvcc",
+        toolchain_info = {
+            name = "cuda",
+            cachekey = "cuda_arch_x86_64_plat_linux",
+            plat = "linux",
+            arch = "x86_64"
         }
     },
     tool_target_cudaScan_linux_x86_64_cu = {
-        toolname = "nvcc",
         program = "/usr/local/cuda/bin/nvcc",
+        toolname = "nvcc",
         toolchain_info = {
             name = "cuda",
-            arch = "x86_64",
             cachekey = "cuda_arch_x86_64_plat_linux",
-            plat = "linux"
+            plat = "linux",
+            arch = "x86_64"
         }
     },
     tool_target_render_linux_x86_64_ld = {
-        toolname = "gxx",
         program = "/usr/bin/g++",
+        toolname = "gxx",
         toolchain_info = {
             name = "gcc",
-            arch = "x86_64",
             cachekey = "gcc_arch_x86_64_plat_linux",
-            plat = "linux"
+            plat = "linux",
+            arch = "x86_64"
         }
     },
     tool_target_cudaSaxpy_linux_x86_64_cu = {
-        toolname = "nvcc",
         program = "/usr/local/cuda/bin/nvcc",
+        toolname = "nvcc",
         toolchain_info = {
             name = "cuda",
-            arch = "x86_64",
             cachekey = "cuda_arch_x86_64_plat_linux",
-            plat = "linux"
+            plat = "linux",
+            arch = "x86_64"
         }
     }
 }

@@ -1,9 +1,5 @@
-checking for Microsoft Visual Studio (x64) version ... 2022
-checking for Cuda SDK directory ... C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4
-[ 20%]: compiling.release asst3\render\display.cpp
-[ 20%]: compiling.release asst3\render\main.cpp
-[ 20%]: compiling.release asst3\render\benchmark.cu
-error: main.cpp
-asst3\render\main.cpp(178): error C3861: “glutInit”: 找不到标识符
-
-  > in asst3\render\main.cpp
+post to traffic ok!
+lease asst3/render/cudaRenderer.cu
+[ 81%]: devlinking.release render_gpucode.cu.o
+[ 81%]: linking.release render
+[100%]: build ok, spent 2.372s
