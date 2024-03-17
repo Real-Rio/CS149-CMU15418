@@ -1,11 +1,5 @@
 {
     cmdlines = {
-        "xmake build cudaScan",
-        "xmake config -m release",
-        "xmake build cudaScan",
-        "xmake run cudaScan -n 2097152",
-        "xmake run cudaScan -n 2097152 -t",
-        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\explorer.lua]],
         [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]],
         [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\targets.lua]],
         [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\targets.lua]],
@@ -64,6 +58,14 @@
         "xmake check",
         "xmake build render",
         [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\explorer.lua]],
-        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]]
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]],
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\explorer.lua]],
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]],
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\explorer.lua]],
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]],
+        [[xmake l E:\software\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\config.lua]],
+        "xmake check"
+    }
+}\vscode\.vscode\extensions\tboox.xmake-vscode-2.3.0\assets\explorer.lua]]
     }
 }

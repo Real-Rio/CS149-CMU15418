@@ -90,9 +90,12 @@ void exclusive_scan(int *input, int N, int *result)
         num = (N + two_dplus1 - 1) / two_dplus1;
         blocks = (num + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
 
-        if(num<THREADS_PER_BLOCK) {
+        if (num < THREADS_PER_BLOCK)
+        {
             upsweep<<<1, num>>>(two_dplus1, two_d, N, result);
-        }else {
+        }
+        else
+        {
             upsweep<<<blocks, THREADS_PER_BLOCK>>>(two_dplus1, two_d, N, result);
         }
         cudaDeviceSynchronize();
@@ -100,7 +103,6 @@ void exclusive_scan(int *input, int N, int *result)
 
     setElementToZero<<<1, 1>>>(result, N, N - 1);
     cudaDeviceSynchronize();
-    
 
     for (int two_d = N / 2; two_d >= 1; two_d /= 2)
     {
@@ -108,12 +110,13 @@ void exclusive_scan(int *input, int N, int *result)
         num = (N + two_dplus1 - 1) / two_dplus1;
         blocks = (num + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
 
-        if(num<THREADS_PER_BLOCK) {
-                downsweep<<<1, num>>>(two_dplus1, two_d, N, result);
-
-        }else {
+        if (num < THREADS_PER_BLOCK)
+        {
+            downsweep<<<1, num>>>(two_dplus1, two_d, N, result);
+        }
+        else
+        {
             downsweep<<<blocks, THREADS_PER_BLOCK>>>(two_dplus1, two_d, N, result);
-
         }
         cudaDeviceSynchronize();
     }
@@ -207,34 +210,34 @@ double cudaScanThrust(int *inarray, int *end, int *resultarray)
 //
 // Note that the out_idxs array will simply have the same set of values as the
 // flags array at this point, but we will apply exclusive_scan afterwards.
-__global__ void find_repeat_flags(int N, int* device_input, int* flags,
-                                  int* out_idxs) {
-  int index = blockIdx.x * blockDim.x + threadIdx.x;
-  if (index < N - 1) {  // Skip the last element.
-    int flag_i = 0;
-    // int idx_i = 0;
-    if (device_input[index] == device_input[index + 1]) {
-      flag_i = 1;
-    //   idx_i = index;
+__global__ void find_repeat_flags(int N, int *device_input, int *flags,
+                                  int *out_idxs)
+{
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    if (index < N - 1)
+    { // Skip the last element.
+        int flag_i = 0;
+        if (device_input[index] == device_input[index + 1])
+        {
+            flag_i = 1;
+        }
+        flags[index] = flag_i;
+        out_idxs[index] = flag_i;
     }
-    flags[index] = flag_i;
-    out_idxs[index] = flag_i;
-  }
 }
 
 // Finds repeated elements and adds them to the output array.
-__global__ void find_repeat_elements(int N, 
-// int* repeat_idxs, 
-int* flags,
-                                     int* out_idxs,
-                                     // int* num_repeats,
-                                     int* device_output) {
-  int index = blockIdx.x * blockDim.x + threadIdx.x;
-  if (index < N - 1 && flags[index] == 1) {  // Skip the last element.
-    // const int input_idx = repeat_idxs[index];
-    const int out_idx = out_idxs[index];
-    device_output[out_idx] = index;
-  }
+__global__ void find_repeat_elements(int N,
+                                     int *flags,
+                                     int *out_idxs,
+                                     int *device_output)
+{
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    if (index < N - 1 && flags[index] == 1)
+    { // Skip the last element.
+        const int out_idx = out_idxs[index];
+        device_output[out_idx] = index;
+    }
 }
 
 // find_repeats --
@@ -243,49 +246,47 @@ int* flags,
 // indices `i` for which `device_input[i] == device_input[i+1]`.
 //
 // Returns the total number of pairs found
-int find_repeats(int* device_input, int length, int* device_output) {
-  // CS149 TODO:
-  //
-  // Implement this function. You will probably want to
-  // make use of one or more calls to exclusive_scan(), as well as
-  // additional CUDA kernel launches.
-  //    
-  // Note: As in the scan code, the calling code ensures that
-  // allocated arrays are a power of 2 in size, so you can use your
-  // exclusive_scan function with them. However, your implementation
-  // must ensure that the results of find_repeats are correct given
-  // the actual array length.
-  const int blocks = (length + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
-  const int N = nextPow2(length);
+int find_repeats(int *device_input, int length, int *device_output)
+{
+    // CS149 TODO:
+    //
+    // Implement this function. You will probably want to
+    // make use of one or more calls to exclusive_scan(), as well as
+    // additional CUDA kernel launches.
+    //
+    // Note: As in the scan code, the calling code ensures that
+    // allocated arrays are a power of 2 in size, so you can use your
+    // exclusive_scan function with them. However, your implementation
+    // must ensure that the results of find_repeats are correct given
+    // the actual array length.
+    const int blocks = (length + THREADS_PER_BLOCK - 1) / THREADS_PER_BLOCK;
+    const int N = nextPow2(length);
 
-  int* flags = nullptr;
-//   int* repeat_idxs = nullptr;
-  int* out_idxs = nullptr;
-  cudaMalloc((void **)&flags, N * sizeof(int));
-//   cudaMalloc((void **)&repeat_idxs, N * sizeof(int));
-  cudaMalloc((void **)&out_idxs, N * sizeof(int));
-  find_repeat_flags<<<blocks, THREADS_PER_BLOCK>>>(length, device_input, flags,
-                                                   out_idxs);
-  cudaDeviceSynchronize();
+    int *flags = nullptr;
+    int *out_idxs = nullptr;
+    cudaMalloc((void **)&flags, N * sizeof(int));
+    cudaMalloc((void **)&out_idxs, N * sizeof(int));
+    find_repeat_flags<<<blocks, THREADS_PER_BLOCK>>>(length, device_input, flags,
+                                                     out_idxs);
+    cudaDeviceSynchronize();
 
-  exclusive_scan(flags, N, out_idxs);
-  cudaDeviceSynchronize();
+    exclusive_scan(flags, N, out_idxs);
+    cudaDeviceSynchronize();
 
-  find_repeat_elements<<<blocks, THREADS_PER_BLOCK>>>(length,
-                                                      flags, out_idxs,
-                                                      device_output);
-  int* num_ret = new int[1];
-  cudaMemcpy(num_ret, out_idxs + length - 1, 1 * sizeof(int), cudaMemcpyDeviceToHost);
-  const int ret = num_ret[0];
-  delete [] num_ret;
+    find_repeat_elements<<<blocks, THREADS_PER_BLOCK>>>(length,
+                                                        flags, out_idxs,
+                                                        device_output);
+    int *num_ret = new int[1];
+    cudaMemcpy(num_ret, out_idxs + length - 1, 1 * sizeof(int), cudaMemcpyDeviceToHost);
+    const int ret = num_ret[0];
+    delete[] num_ret;
 
-  cudaDeviceSynchronize();
+    cudaDeviceSynchronize();
 
-  cudaFree(flags);
-//   cudaFree(repeat_idxs);
-  cudaFree(out_idxs);
+    cudaFree(flags);
+    cudaFree(out_idxs);
 
-  return ret;
+    return ret;
 }
 
 //
