@@ -49,6 +49,10 @@
         "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
         "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
         "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
-        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua"
+        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
+        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
+        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
+        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/explorer.lua",
+        "xmake l /home/rio/.vscode-server/extensions/tboox.xmake-vscode-2.3.0/assets/config.lua"
     }
 }
